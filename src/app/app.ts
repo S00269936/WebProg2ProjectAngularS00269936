@@ -1,9 +1,10 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { BikeList } from './features/bikes/pages/bike-list/bike-list';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, BikeList],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })
