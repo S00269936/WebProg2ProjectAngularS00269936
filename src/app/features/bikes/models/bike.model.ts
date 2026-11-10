@@ -1,4 +1,4 @@
-export interface BikeModel {
+export interface Bike {
     _id?: string;
   bikeName: string;
   type: string;

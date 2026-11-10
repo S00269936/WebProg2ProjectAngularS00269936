@@ -1,1 +1,13 @@
-<p>bike-list works!</p>
+<h2>Bike List</h2>
+
+@if (bikes$ | async; as bikes) {
+
+<ul>
+  @for (bike of bikes; track bike._id) {
+  <li>{{ bike.bikeName }} {{ bike._id }}</li>
+  }
+</ul>
+} @else {
+Loading cars...
+
+}
