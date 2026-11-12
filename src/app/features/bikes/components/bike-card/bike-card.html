@@ -1,6 +1,5 @@
 <div class="card">
     <h3>{{ bike().bikeName }} {{ bike().type }}</h3>
-
     @if(bike().pricePerHour){ <p>Price per hour: €{{ bike().pricePerHour }}</p>}
-
+    <a [routerLink]="['/bikes', bike()._id]">View Bike</a>
 </div>
