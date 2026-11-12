@@ -8,7 +8,7 @@ import { Bike } from '../models/bike.model';
 })
 export class BikeService {
   private http = inject(HttpClient);
-  private apiUrl = 'http://localhost:5050/bikes'; 
+  private apiUrl = 'http://localhost:5050/api/v1/bikes'; 
 
   getCars(): Observable<Bike[]> {
     return this.http.get<Bike[]>(this.apiUrl)

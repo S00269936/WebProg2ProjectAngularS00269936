@@ -3,9 +3,11 @@
 @if (bikes$ | async; as bikes) {
 
 <ul>
-  @for (bike of bikes; track bike._id) {
-  <li>{{ bike.bikeName }} {{ bike._id }}</li>
+    <div class="grid">
+  @for (bike of bikes; track bike._id){
+    <app-bike-card [bike]="bike" />
   }
+</div>
 </ul>
 } @else {
 Loading cars...
