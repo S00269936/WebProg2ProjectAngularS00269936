@@ -1,0 +1,14 @@
+<h2>Bike Details</h2>
+
+@if (bike(); as bikeData) {
+  <div>
+    <h1>{{ bikeData.bikeName }}</h1>
+    <p>Type: {{ bikeData.type }}</p>
+    <p>Price per hour: {{ bikeData.pricePerHour }}</p>
+    <p>Price per day: {{bikeData.pricePerDay}}</p>
+  </div>}
+ @else {
+  <p>Loading bike details...</p>
+} 
+
+    The route parameter id is {{id()}}

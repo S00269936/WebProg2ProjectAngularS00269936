@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { BikeList } from './features/bikes/pages/bike-list/bike-list';
+import { BikeDetails } from './features/bikes/components/bike-details/bike-details';
 
 export const routes: Routes = [
     {
@@ -10,5 +11,9 @@ export const routes: Routes = [
     {
         path: 'bikes',
         component: BikeList
+    },
+    {
+        path: 'bikes/:id',
+        component: BikeDetails
     }
 ];

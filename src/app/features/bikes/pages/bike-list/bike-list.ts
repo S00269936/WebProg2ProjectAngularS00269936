@@ -17,7 +17,7 @@ export class BikeList implements OnInit {
   bikes$!: Observable<Bike[]>;
 
   ngOnInit(): void {
-    this.bikes$ = this.bikeService.getCars();
+    this.bikes$ = this.bikeService.getBikes();
   }
 
 }

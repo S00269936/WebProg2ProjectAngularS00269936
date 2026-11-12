@@ -10,8 +10,12 @@ export class BikeService {
   private http = inject(HttpClient);
   private apiUrl = 'http://localhost:5050/api/v1/bikes'; 
 
-  getCars(): Observable<Bike[]> {
+  getBikes(): Observable<Bike[]> {
     return this.http.get<Bike[]>(this.apiUrl)
+  }
+
+  getBikebyId(id: string): Observable<Bike> {
+    return this.http.get<Bike>(`${this.apiUrl}/${id}`);
   }
 
 }
