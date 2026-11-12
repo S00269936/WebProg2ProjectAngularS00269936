@@ -1,1 +1,42 @@
-<p>bike-form works!</p>
+<form [formGroup]="bikeForm" (ngSubmit)="onSubmit()" class="bike-form">
+    <h2>Bike Details Form</h2>
+  
+  
+    <!-- Bike Name Field -->
+    <div class="form-group">
+      <label for="bikeName">Bike Name:</label>
+      <input id="bikeName" type="text" formControlName="bikeName" placeholder="e.g. Marlin" />
+    </div>
+  
+    <!-- Type Field -->
+    <div class="form-group">
+      <label for="type">Type:</label>
+      <input id="type" type="text" formControlName="type" placeholder="e.g. Mountain" />
+      
+    </div>
+  
+    <!-- Price Per Hour Field -->
+    <div class="form-group">
+      <label for="pricePerHour">Price Per Hour:</label>
+      <input id="pricePerHour" type="number" formControlName="pricePerHour" placeholder="e.g. €3" />
+    </div>
+
+    <!-- Price Per Day Field -->
+    <div class="form-group">
+        <label for="pricePerday">Price Per Day:</label>
+        <input id="pricePerDay" type="number" formControlName="pricePerDay" placeholder="e.g. €25" />
+      </div>
+
+      <!-- Description Field -->
+    <div class="form-group">
+        <label for="description">Description:</label>
+        <input id="description" type="number" formControlName="description" placeholder="e.g. can do sick tricks" />
+      </div>
+  
+    <!-- Action Buttons -->
+    <div class="button-group">
+      <button type="submit">Save Bike</button>
+  
+    </div>
+  </form>
+  
