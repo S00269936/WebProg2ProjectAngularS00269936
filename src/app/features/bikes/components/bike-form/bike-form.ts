@@ -3,10 +3,15 @@ import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CreateBikeDto } from '../../models/bike.model';
 import { Router } from '@angular/router';
 import { BikeService } from '../../services/bike.service';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
+import { MatProgressBar } from '@angular/material/progress-bar';
 
 @Component({
   selector: 'app-bike-form',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatCardModule, MatProgressBar],
   templateUrl: './bike-form.html',
   styleUrl: './bike-form.scss',
 })

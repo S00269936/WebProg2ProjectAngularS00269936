@@ -1,45 +1,57 @@
+
 <form [formGroup]="bikeForm" (ngSubmit)="onSubmit()" class="bike-form">
     <h2>Bike Details Form</h2>
   
-  
     <!-- Bike Name Field -->
-    <div class="form-group">
-      <label for="bikeName">Bike Name:</label>
-      <input id="bikeName" type="text" formControlName="bikeName" placeholder="e.g. Marlin" />
-    </div>
+    <mat-form-field appearance="outline">
+      <mat-label>Bike Name</mat-label>
+      <input matInput formControlName="bikeName" placeholder="e.g. Marlin" />
+      @if (bikeForm.controls.bikeName.hasError('required')) {
+        <mat-error>Bike Name is required</mat-error>
+      }
+    </mat-form-field>
   
     <!-- Type Field -->
-    <div class="form-group">
-      <label for="type">Type:</label>
-      <input id="type" type="text" formControlName="type" placeholder="e.g. Mountain" />
-      
-    </div>
+    <mat-form-field appearance="outline">
+      <mat-label>Type</mat-label>
+      <input matInput formControlName="type" placeholder="e.g. Mountain" />
+      @if (bikeForm.controls.type.hasError('required')) {
+        <mat-error>Type is required</mat-error>
+      }
+    </mat-form-field>
   
     <!-- Price Per Hour Field -->
-    <div class="form-group">
-      <label for="pricePerHour">Price Per Hour:</label>
-      <input id="pricePerHour" type="number" formControlName="pricePerHour" placeholder="e.g. €3" />
-    </div>
-
+    <mat-form-field appearance="outline">
+      <mat-label>Price Per Hour</mat-label>
+      <input matInput type="number" formControlName="pricePerHour" placeholder="e.g. 3" />
+      <mat-hint>Optional</mat-hint>
+    </mat-form-field>
+  
     <!-- Price Per Day Field -->
-    <div class="form-group">
-        <label for="pricePerday">Price Per Day:</label>
-        <input id="pricePerDay" type="number" formControlName="pricePerDay" placeholder="e.g. €25" />
-      </div>
-
-      <!-- Description Field -->
-    <div class="form-group">
-        <label for="description">Description:</label>
-        <input id="description" type="number" formControlName="description" placeholder="e.g. can do sick tricks" />
-      </div>
+    <mat-form-field appearance="outline">
+      <mat-label>Price Per Day</mat-label>
+      <input matInput type="number" formControlName="pricePerDay" placeholder="e.g. 25" />
+      <mat-hint>Optional</mat-hint>
+    </mat-form-field>
+  
+    <!-- Description Field -->
+    <mat-form-field appearance="outline">
+      <mat-label>Description</mat-label>
+      <input matInput formControlName="description" placeholder="e.g. Can do sick tricks" />
+      <mat-hint>Optional</mat-hint>
+    </mat-form-field>
   
     <!-- Action Buttons -->
-    @if (saveError(); as message) { <p role="alert">{{ message }}</p> }
-  <div class="button-group">
-    <button type="submit" [disabled]="saving()">
-      {{ saving() ? 'Saving...' : 'Save bike' }}
-    </button>
-    <a routerLink="/bikes">Cancel</a>
-  </div>
+    @if (saveError(); as message) {
+      <p role="alert">{{ message }}</p>
+    }
+  
+    <div class="button-group">
+      <button matButton="filled" style="margin-right: 10px;" type="submit" [disabled]="saving()">
+        {{ saving() ? 'Saving...' : 'Save bike' }}
+        @if (saving()) { <mat-progress-bar mode="buffer" /> }
+      </button>
+      <a matButton routerLink="/bikes">Cancel</a>
+    </div>
   </form>
   
