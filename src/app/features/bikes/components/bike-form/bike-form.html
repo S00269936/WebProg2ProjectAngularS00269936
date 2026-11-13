@@ -34,9 +34,12 @@
       </div>
   
     <!-- Action Buttons -->
-    <div class="button-group">
-      <button type="submit">Save Bike</button>
-  
-    </div>
+    @if (saveError(); as message) { <p role="alert">{{ message }}</p> }
+  <div class="button-group">
+    <button type="submit" [disabled]="saving()">
+      {{ saving() ? 'Saving...' : 'Save bike' }}
+    </button>
+    <a routerLink="/bikes">Cancel</a>
+  </div>
   </form>
   
