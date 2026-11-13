@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Bike } from '../../models/bike.model';
 import { RouterLink } from '@angular/router';
+import { BikeService } from '../../services/bike.service';
 
 @Component({
   selector: 'app-bike-form',
@@ -11,6 +12,7 @@ import { RouterLink } from '@angular/router';
 })
 export class BikeForm {
   private formBuilder = inject(FormBuilder);
+  private bikeService = inject(BikeService);
 
    bikeForm = this.formBuilder.group({
      bikeName: ['', Validators.required],
@@ -21,10 +23,17 @@ export class BikeForm {
      //ADD FIELDS LATER
    });
 
-onSubmit(): void {
-      const bikeData: Bike = this.bikeForm.value as Bike;
-      console.log('Submitted Bike:', bikeData);
-      
+   onSubmit(): void {
+    const bikeData: Bike = this.bikeForm.value as Bike;
+    console.log('Submitted Bike:', bikeData);
+    
+    this.bikeService.addBike(bikeData).subscribe({
+      next: (response) => {
+        console.log('Bike added successfully:', response);
+      },
+      error: (error) => {
+        console.error('Error adding bike:', error);
+      }
+    });
   }
-
 }
