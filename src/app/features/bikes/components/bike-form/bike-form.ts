@@ -20,8 +20,8 @@ export class BikeForm {
   bikeForm = this.formBuilder.nonNullable.group({
     bikeName: ['', Validators.required],
     type: ['', Validators.required],
-    pricePerHour: [0],
-    pricePerDay: [0],
+    pricePerHour: [999], //defaults to 999 rather than null, might change
+    pricePerDay: [999],
     description: ['']
     //add more fields later
 
@@ -30,7 +30,7 @@ export class BikeForm {
   
 onSubmit(): void {
   const { bikeName, type, pricePerHour, pricePerDay, description } = this.bikeForm.getRawValue();
-  const newBike: CreateBikeDto = { bikeName, type, pricePerHour, pricePerDay, description };
+  const newBike: CreateBikeDto = { bikeName, type, pricePerHour, pricePerDay, description : description ?? undefined };
   this.saving.set(true);
   this.saveError.set(null);
   this.bikeService.addBike(newBike).subscribe({
