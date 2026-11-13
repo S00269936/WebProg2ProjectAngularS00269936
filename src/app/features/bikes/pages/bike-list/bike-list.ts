@@ -4,6 +4,7 @@ import { AsyncPipe } from '@angular/common';
 import { BikeCard } from '../../components/bike-card/bike-card';
 import { RouterLink } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { withLoadState } from '../../../../shared/load-state.js'
 
 
 @Component({
