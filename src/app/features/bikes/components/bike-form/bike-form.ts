@@ -1,12 +1,12 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
-import { Bike } from '../../models/bike.model';
-import { RouterLink, Router } from '@angular/router';
+import { CreateBikeDto } from '../../models/bike.model';
+import { Router } from '@angular/router';
 import { BikeService } from '../../services/bike.service';
 
 @Component({
   selector: 'app-bike-form',
-  imports: [RouterLink, ReactiveFormsModule],
+  imports: [ReactiveFormsModule],
   templateUrl: './bike-form.html',
   styleUrl: './bike-form.scss',
 })
@@ -15,23 +15,23 @@ export class BikeForm {
   private bikeService = inject(BikeService);
   private router = inject(Router);
 
-   bikeForm = this.formBuilder.group({
-     bikeName: ['', Validators.required],
-     type: ['', Validators.required],
-     pricePerHour: [''],
-     pricePerDay: [''],
-     description: [''],
-     //ADD FIELDS LATER
-   });
+  bikeForm = this.formBuilder.nonNullable.group({
+    bikeName: ['', Validators.required],
+    type: ['', Validators.required],
+    pricePerHour: [0],
+    pricePerDay: [0],
+    description: ['']
+    //add more fields later
+  });
 
-   onSubmit(): void {
-    const bikeData: Bike = this.bikeForm.value as Bike;
-    console.log('Submitted Bike:', bikeData);
-    this.router.navigate(['/bikes']);
-    
-    this.bikeService.addBike(bikeData).subscribe({
+  onSubmit(): void {
+    const { bikeName, type, pricePerHour, pricePerDay, description } = this.bikeForm.getRawValue();
+    const newBike: CreateBikeDto = { bikeName, type, pricePerHour, pricePerDay, description };
+    console.log('Submitted Bike:', newBike);
+    this.bikeService.addBike(newBike).subscribe({
       next: (response) => {
         console.log('Bike added successfully:', response);
+        this.router.navigate(['/bikes']);
       },
       error: (error) => {
         console.error('Error adding bike:', error);
