@@ -22,6 +22,7 @@ export class BikeForm {
     pricePerDay: [0],
     description: ['']
     //add more fields later
+    
   });
 
   onSubmit(): void {
