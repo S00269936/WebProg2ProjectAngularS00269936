@@ -4,11 +4,12 @@ import { Observable } from 'rxjs';
 import { Bike } from '../../models/bike.model';
 import { AsyncPipe } from '@angular/common';
 import { BikeCard } from '../../components/bike-card/bike-card';
+import { RouterLink } from '@angular/router';
 
 
 @Component({
   selector: 'app-bike-list',
-  imports: [AsyncPipe, BikeCard],
+  imports: [AsyncPipe, BikeCard, RouterLink],
   templateUrl: './bike-list.html',
   styleUrl: './bike-list.scss',
 })

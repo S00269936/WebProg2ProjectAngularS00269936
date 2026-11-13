@@ -14,11 +14,11 @@ export const routes: Routes = [
         component: BikeList
     },
     {
+        path: 'bikes/new',
+        component: BikeForm
+    },
+    {
         path: 'bikes/:id',
         component: BikeDetails
     },
-    {
-        path: 'bikes/new',
-        component: BikeForm
-    }
 ];

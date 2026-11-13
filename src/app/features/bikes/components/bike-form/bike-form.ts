@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Bike } from '../../models/bike.model';
-import { RouterLink } from '@angular/router';
+import { RouterLink, Router } from '@angular/router';
 import { BikeService } from '../../services/bike.service';
 
 @Component({
@@ -13,6 +13,7 @@ import { BikeService } from '../../services/bike.service';
 export class BikeForm {
   private formBuilder = inject(FormBuilder);
   private bikeService = inject(BikeService);
+  private router = inject(Router);
 
    bikeForm = this.formBuilder.group({
      bikeName: ['', Validators.required],
@@ -26,6 +27,7 @@ export class BikeForm {
    onSubmit(): void {
     const bikeData: Bike = this.bikeForm.value as Bike;
     console.log('Submitted Bike:', bikeData);
+    this.router.navigate(['/bikes']);
     
     this.bikeService.addBike(bikeData).subscribe({
       next: (response) => {
