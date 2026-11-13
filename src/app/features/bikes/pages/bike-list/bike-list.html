@@ -1,16 +1,18 @@
 <h2>Bike List</h2>
-
-@if (bikes$ | async; as bikes) {
-
-<ul>
-    <div class="grid">
-  @for (bike of bikes; track bike._id){
-    <app-bike-card [bike]="bike" />
-  }
-</div>
-<a routerLink="/bikes/new">Add New Bike</a>
-</ul>
+@let s = state();
+<!-- s is signal -->
+@if (s.status === 'loading') {
+  <p>Loading bikes</p>
+} @else if (s.status === 'error') {
+  <p>{{ s.message }}</p>
+} @else if (s.data.length === 0) {
+  <p>No bikes available at the moment</p>
 } @else {
-Loading cars...
-
+  <div class="grid">
+    @for (bike of s.data; track bike._id) {
+      <app-bike-card [bike]="bike" />
+    }
+  </div>
 }
+
+<a routerLink="/bikes/new">Add New Bike</a>

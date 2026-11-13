@@ -12,17 +12,17 @@ export class BikeService {
 
   getBikes(): Observable<Bike[]> {
     return this.http.get<Bike[]>(this.apiUrl)
+    .pipe(catchError((err) => this.handleError(err)));
   }
 
   getBikebyId(id: string): Observable<Bike> {
-    return this.http.get<Bike>(`${this.apiUrl}/${id}`);
+    return this.http.get<Bike>(`${this.apiUrl}/${id}`)
+    .pipe(catchError((err) => this.handleError(err)));
   }
 
   addBike(bike: CreateBikeDto): Observable<Bike> {
     return this.http.post<Bike>(this.apiUrl, bike)
-    .pipe(
-      catchError(this.handleError)
-    )
+    .pipe(catchError((err) => this.handleError(err)));
   }
 
   private handleError(error: HttpErrorResponse): Observable<never> {
