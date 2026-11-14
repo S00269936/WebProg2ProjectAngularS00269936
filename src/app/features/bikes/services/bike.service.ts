@@ -24,6 +24,11 @@ export class BikeService {
     return this.http.post<Bike>(this.apiUrl, bike)
     .pipe(catchError((err) => this.handleError(err)));
   }
+  
+  updateBike(id: string, bike: CreateBikeDto): Observable<Bike> {
+    return this.http.put<Bike>(`${this.apiUrl}/${id}`, bike)
+    .pipe(catchError((err) => this.handleError(err)));
+  }
 
   private handleError(error: HttpErrorResponse): Observable<never> {
     let message: string;

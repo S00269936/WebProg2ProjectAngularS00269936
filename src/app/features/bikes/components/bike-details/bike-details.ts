@@ -4,10 +4,12 @@ import { BikeService } from '../../services/bike.service';
 import { LoadState, withLoadState } from '../../../../shared/load-state.js';
 import { toSignal, toObservable } from '@angular/core/rxjs-interop';
 import { switchMap } from 'rxjs';
+import { RouterLink } from '@angular/router';
+import { MatAnchor } from '@angular/material/button';
 
 @Component({
   selector: 'app-bike-details',
-  imports: [],
+  imports: [RouterLink, MatAnchor],
   templateUrl: './bike-details.html',
   styleUrl: './bike-details.scss',
 })

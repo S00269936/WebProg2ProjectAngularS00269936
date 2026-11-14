@@ -10,4 +10,5 @@
   <p>Type: {{ s.data.type }}</p>
   <p>Price per hour: €{{ s.data.pricePerHour }}</p>
   <p>Price per day: €{{ s.data.pricePerDay }}</p>
+  <a matButton matButton="filled" [routerLink]="['/bikes', s.data._id, 'edit']">Edit</a>
 }

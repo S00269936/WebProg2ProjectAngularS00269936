@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, input, OnInit } from '@angular/core';
 import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CreateBikeDto } from '../../models/bike.model';
 import { Router } from '@angular/router';
@@ -16,7 +16,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './bike-form.html',
   styleUrl: './bike-form.scss',
 })
-export class BikeForm {
+export class BikeForm implements OnInit {
+  readonly id = input<string>();  // note this is optional by default
   private formBuilder = inject(FormBuilder);
   private bikeService = inject(BikeService);
   private router = inject(Router);
@@ -37,9 +38,11 @@ bikeForm = this.formBuilder.nonNullable.group({
 onSubmit(): void {
   const { bikeName, type, pricePerHour, pricePerDay, description } = this.bikeForm.getRawValue();
   const newBike: CreateBikeDto = { bikeName, type, pricePerHour, pricePerDay, description : description ?? undefined };
+  const id = this.id();
+  const request = id ? this.bikeService.updateBike(id, newBike) : this.bikeService.addBike(newBike);
   this.saving.set(true);
   this.saveError.set(null);
-  this.bikeService.addBike(newBike).subscribe({
+  request.subscribe({
     next: (response) => {
       this.snackBar.open(`${newBike.bikeName} saved`, 'Close', { duration: 10000 });
       console.log('Bike added successfully:', response);
@@ -49,6 +52,16 @@ onSubmit(): void {
       this.saveError.set(err.message);
       this.saving.set(false);
     }
+  });
+}
+ngOnInit(): void {
+  const id = this.id();
+  if (!id) return; // adding a new bike, nothing to load
+
+  this.bikeService.getBikebyId(id).subscribe({
+    next: (bike) =>
+      this.bikeForm.patchValue({ bikeName: bike.bikeName, type: bike.type, pricePerHour: bike.pricePerHour ?? 0, pricePerDay: bike.pricePerDay ?? 0, description: bike.description ?? '' }),
+    error: (err: Error) => this.saveError.set(err.message),
   });
 }
 }

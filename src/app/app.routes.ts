@@ -18,6 +18,10 @@ export const routes: Routes = [
         component: BikeForm
     },
     {
+        path: 'bikes/:id/edit',
+        component: BikeForm
+    },
+    {
         path: 'bikes/:id',
         component: BikeDetails
     },
