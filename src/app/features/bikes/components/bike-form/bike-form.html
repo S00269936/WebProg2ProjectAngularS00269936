@@ -1,53 +1,56 @@
-
 <form [formGroup]="bikeForm" (ngSubmit)="onSubmit()" class="bike-form">
     <h2>Bike Details Form</h2>
-  
     <!-- Bike Name Field -->
     <mat-form-field appearance="outline">
       <mat-label>Bike Name</mat-label>
       <input matInput formControlName="bikeName" placeholder="e.g. Marlin" />
       @if (bikeForm.controls.bikeName.hasError('required')) {
         <mat-error>Bike Name is required</mat-error>
+      } @else if (bikeForm.controls.bikeName.hasError('minlength')) {
+        <mat-error>Bike Name must be at least 2 characters</mat-error>
+      } @else if (bikeForm.controls.bikeName.hasError('maxlength')) {
+        <mat-error>Bike Name must be 30 characters or fewer</mat-error>
       }
     </mat-form-field>
-  
     <!-- Type Field -->
     <mat-form-field appearance="outline">
       <mat-label>Type</mat-label>
       <input matInput formControlName="type" placeholder="e.g. Mountain" />
       @if (bikeForm.controls.type.hasError('required')) {
         <mat-error>Type is required</mat-error>
+      } @else if (bikeForm.controls.type.hasError('maxlength')) {
+        <mat-error>Type must be 30 characters or fewer</mat-error>
       }
     </mat-form-field>
-  
     <!-- Price Per Hour Field -->
     <mat-form-field appearance="outline">
       <mat-label>Price Per Hour</mat-label>
       <input matInput type="number" formControlName="pricePerHour" placeholder="e.g. 3" />
-      <mat-hint>Optional</mat-hint>
+      @if (bikeForm.controls.pricePerHour.hasError('min')) {
+        <mat-error>Price per hour must be at least €1</mat-error>
+      }
     </mat-form-field>
-  
     <!-- Price Per Day Field -->
     <mat-form-field appearance="outline">
       <mat-label>Price Per Day</mat-label>
       <input matInput type="number" formControlName="pricePerDay" placeholder="e.g. 25" />
-      <mat-hint>Optional</mat-hint>
+      @if (bikeForm.controls.pricePerDay.hasError('min')) {
+        <mat-error>Price per day must be at least €1</mat-error>
+      }
     </mat-form-field>
-  
     <!-- Description Field -->
     <mat-form-field appearance="outline">
       <mat-label>Description</mat-label>
       <input matInput formControlName="description" placeholder="e.g. Can do sick tricks" />
       <mat-hint>Optional</mat-hint>
     </mat-form-field>
-  
     <!-- Action Buttons -->
     @if (saveError(); as message) {
       <p role="alert">{{ message }}</p>
     }
   
     <div class="button-group">
-      <button matButton="filled" style="margin-right: 10px;" type="submit" [disabled]="saving()">
+      <button matButton="filled" style="margin-right: 10px;" type="submit" [disabled]="saving() || bikeForm.invalid">
         {{ saving() ? 'Saving...' : 'Save bike' }}
         @if (saving()) { <mat-progress-bar mode="buffer" /> }
       </button>
