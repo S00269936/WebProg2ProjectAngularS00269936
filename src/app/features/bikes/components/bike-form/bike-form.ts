@@ -9,6 +9,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBar, MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { notBlank } from '../../../../shared/validators/not-blank.validators';
+import { wrongValue } from '../../../../shared/validators/wrong-value.validators';
 
 @Component({
   selector: 'app-bike-form',
@@ -27,8 +29,8 @@ export class BikeForm implements OnInit {
 
   
 bikeForm = this.formBuilder.nonNullable.group({
-  bikeName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(30)]],
-  type: ['', [Validators.required, Validators.maxLength(30)]],
+  bikeName: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(30), notBlank, wrongValue('test')]],
+  type: ['', [Validators.required, Validators.maxLength(30), notBlank]],
   pricePerHour: [0, [Validators.min(1)]], 
   pricePerDay: [0, [Validators.min(1)]],
   description: ['']

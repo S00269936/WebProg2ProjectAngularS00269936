@@ -1,27 +1,33 @@
 <form [formGroup]="bikeForm" (ngSubmit)="onSubmit()" class="bike-form">
-    <h2>Bike Details Form</h2>
+    <h2>Bike Details Form</h2>    
     <!-- Bike Name Field -->
     <mat-form-field appearance="outline">
-      <mat-label>Bike Name</mat-label>
-      <input matInput formControlName="bikeName" placeholder="e.g. Marlin" />
-      @if (bikeForm.controls.bikeName.hasError('required')) {
-        <mat-error>Bike Name is required</mat-error>
-      } @else if (bikeForm.controls.bikeName.hasError('minlength')) {
-        <mat-error>Bike Name must be at least 2 characters</mat-error>
-      } @else if (bikeForm.controls.bikeName.hasError('maxlength')) {
-        <mat-error>Bike Name must be 30 characters or fewer</mat-error>
-      }
-    </mat-form-field>
+        <mat-label>Bike Name</mat-label>
+        <input matInput formControlName="bikeName" placeholder="e.g. Marlin" />
+        @if (bikeForm.controls.bikeName.hasError('blank')) {
+            <mat-error>Bike Name cannot be only spaces</mat-error>
+        } @if (bikeForm.controls.bikeName.hasError('wrongValue')) {
+            <mat-error>Bike Name cannot be test</mat-error>
+        } @else if (bikeForm.controls.bikeName.hasError('required')) {
+            <mat-error>Bike Name is required</mat-error>
+        } @else if (bikeForm.controls.bikeName.hasError('minlength')) {
+            <mat-error>Bike Name must be at least 2 characters</mat-error>
+        } @else if (bikeForm.controls.bikeName.hasError('maxlength')) {
+            <mat-error>Bike Name must be 30 characters or fewer</mat-error>
+        }
+    </mat-form-field>      
     <!-- Type Field -->
     <mat-form-field appearance="outline">
-      <mat-label>Type</mat-label>
-      <input matInput formControlName="type" placeholder="e.g. Mountain" />
-      @if (bikeForm.controls.type.hasError('required')) {
+        <mat-label>Type</mat-label>
+        <input matInput formControlName="type" placeholder="e.g. Mountain" />
+        @if (bikeForm.controls.type.hasError('blank')) {
+        <mat-error>Type cannot be only spaces</mat-error>
+        } @else if (bikeForm.controls.type.hasError('required')) {
         <mat-error>Type is required</mat-error>
-      } @else if (bikeForm.controls.type.hasError('maxlength')) {
+        } @else if (bikeForm.controls.type.hasError('maxlength')) {
         <mat-error>Type must be 30 characters or fewer</mat-error>
-      }
-    </mat-form-field>
+        }
+    </mat-form-field>  
     <!-- Price Per Hour Field -->
     <mat-form-field appearance="outline">
       <mat-label>Price Per Hour</mat-label>
