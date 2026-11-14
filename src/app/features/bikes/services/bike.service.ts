@@ -24,9 +24,14 @@ export class BikeService {
     return this.http.post<Bike>(this.apiUrl, bike)
     .pipe(catchError((err) => this.handleError(err)));
   }
-  
+
   updateBike(id: string, bike: CreateBikeDto): Observable<Bike> {
     return this.http.put<Bike>(`${this.apiUrl}/${id}`, bike)
+    .pipe(catchError((err) => this.handleError(err)));
+  }
+
+  deleteBike(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`)
     .pipe(catchError((err) => this.handleError(err)));
   }
 

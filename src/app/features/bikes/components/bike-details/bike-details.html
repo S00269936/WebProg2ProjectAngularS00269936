@@ -11,4 +11,8 @@
   <p>Price per hour: €{{ s.data.pricePerHour }}</p>
   <p>Price per day: €{{ s.data.pricePerDay }}</p>
   <a matButton matButton="filled" [routerLink]="['/bikes', s.data._id, 'edit']">Edit</a>
+  <button matButton="outlined" (click)="deleteBike(s.data)" [disabled]="deleting()">Delete</button>
+  @if (deleteError(); as message) {
+    <p class="error">{{ message }}</p>
+  }  
 }
