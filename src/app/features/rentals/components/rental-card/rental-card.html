@@ -1,0 +1,9 @@
+<div class="card">
+    <h3>{{ rental().bikeName }}</h3>
+    <p>Customer: {{ rental().customerName }}</p>
+    <p>Start Date: {{ rental().startDate }}</p>
+    <p>End Date: {{ rental().endDate }}</p>
+    <p>Total Price: €{{ rental().totalPrice }}</p>
+    <p>Status: {{ rental().status ? 'Rented' : 'Not Rented' }}</p>
+    <a [routerLink]="['/rentals', rental()._id]">View Rental</a>
+</div>

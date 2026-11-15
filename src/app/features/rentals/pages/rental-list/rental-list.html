@@ -1,0 +1,18 @@
+<h2>Rental List</h2>
+@let s = state();
+<!-- s is signal -->
+@if (s.status === 'loading') {
+  <p>Loading rentals</p>
+} @else if (s.status === 'error') {
+  <p>{{ s.message }}</p>
+} @else if (s.data.length === 0) {
+  <p>No rentals available at the moment</p>
+} @else {
+  <div class="grid">
+    @for (rental of s.data; track rental._id) {
+      <app-rental-card [rental]="rental"></app-rental-card>
+    }
+  </div>
+}
+
+<a routerLink="/rentals/new">Add New Rental</a>
