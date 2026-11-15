@@ -1,0 +1,107 @@
+<form [formGroup]="rentalForm" (ngSubmit)="onSubmit()" class="rental-form">
+    <h2>Rental Details Form</h2>
+  
+    <!-- Bike ID Field -->
+     <h3>Maybe change how this works, load data from mongo<br>
+    Also add css for form, looks ugly</h3>
+    <mat-form-field appearance="outline">
+      <mat-label>Bike ID</mat-label>
+      <input matInput formControlName="bike" placeholder="Enter Bike ID" />
+      @if (rentalForm.controls.bike.hasError('required')) {
+        <mat-error>Bike ID is required</mat-error>
+      }
+    </mat-form-field>
+  
+    <!-- Bike Name Field -->
+    <mat-form-field appearance="outline">
+      <mat-label>Bike Name</mat-label>
+      <input matInput formControlName="bikeName" placeholder="e.g. Trek Marlin 7" />
+      @if (rentalForm.controls.bikeName.hasError('blank')) {
+        <mat-error>Bike Name cannot be only spaces</mat-error>
+      } @else if (rentalForm.controls.bikeName.hasError('required')) {
+        <mat-error>Bike Name is required</mat-error>
+      }
+      @if (rentalForm.controls.bikeName.hasError('wrongValue')) {
+        <mat-error>Bike Name cannot be test</mat-error>
+      }
+    </mat-form-field>
+  
+    <!-- Customer Name Field -->
+    <mat-form-field appearance="outline">
+      <mat-label>Customer Name</mat-label>
+      <input matInput formControlName="customerName" placeholder="e.g. John Murphy" />
+      @if (rentalForm.controls.customerName.hasError('blank')) {
+        <mat-error>Customer Name cannot be only spaces</mat-error>
+      } @else if (rentalForm.controls.customerName.hasError('required')) {
+        <mat-error>Customer Name is required</mat-error>
+      } @else if (rentalForm.controls.customerName.hasError('maxlength')) {
+        <mat-error>Customer Name must be 30 characters or fewer</mat-error>
+      }
+    </mat-form-field>
+  
+    <!-- Contact Phone Field -->
+    <mat-form-field appearance="outline">
+      <mat-label>Contact Phone</mat-label>
+      <input matInput type="tel" formControlName="contactPhone" placeholder="e.g. 0871234567" />
+      @if (rentalForm.controls.contactPhone.hasError('blank')) {
+        <mat-error>Contact Phone cannot be only spaces</mat-error>
+      } @else if (rentalForm.controls.contactPhone.hasError('required')) {
+        <mat-error>Contact Phone is required</mat-error>
+      }
+    </mat-form-field>
+  
+    <!-- Start Date Field -->
+    <mat-form-field appearance="outline">
+      <mat-label>Start Date</mat-label>
+      <input matInput type="date" formControlName="startDate" />
+      @if (rentalForm.controls.startDate.hasError('required')) {
+        <mat-error>Start Date is required</mat-error>
+      }
+    </mat-form-field>
+  
+    <!-- End Date Field -->
+    <mat-form-field appearance="outline">
+      <mat-label>End Date</mat-label>
+      <input matInput type="date" formControlName="endDate" />
+      @if (rentalForm.controls.endDate.hasError('required')) {
+        <mat-error>End Date is required</mat-error>
+      }
+    </mat-form-field>
+  
+    <!-- Total Price Field -->
+    <mat-form-field appearance="outline">
+      <mat-label>Total Price</mat-label>
+      <input matInput type="number" formControlName="totalPrice" placeholder="e.g. 40" />
+      @if (rentalForm.controls.totalPrice.hasError('required')) {
+        <mat-error>Total Price is required</mat-error>
+      } @else if (rentalForm.controls.totalPrice.hasError('min')) {
+        <mat-error>Total Price must be at least €1</mat-error>
+      }
+    </mat-form-field>
+  
+    <!-- Status Field -->
+    <mat-checkbox formControlName="status">Active Rental</mat-checkbox>
+  
+    <!-- Customer Notes Field -->
+    <mat-form-field appearance="outline">
+      <mat-label>Customer Notes</mat-label>
+      <input matInput formControlName="customerNotes" placeholder="e.g. Needs helmet" />
+      <mat-hint>Optional</mat-hint>
+    </mat-form-field>
+  
+    <!-- Action Buttons -->
+    @if (saveError(); as message) {
+      <p role="alert">{{ message }}</p>
+    }
+  
+    <div class="button-group">
+      <button matButton="filled" style="margin-right: 10px;" type="submit"
+        [disabled]="saving() || rentalForm.invalid">
+        {{ saving() ? 'Saving...' : 'Save Rental' }}
+        @if (saving()) {
+          <mat-progress-bar mode="buffer" />
+        }
+      </button>
+      <a matButton routerLink="/rentals">Cancel</a>
+    </div>
+  </form>

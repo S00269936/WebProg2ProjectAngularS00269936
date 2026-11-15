@@ -4,6 +4,7 @@ import { BikeDetails } from './features/bikes/components/bike-details/bike-detai
 import { BikeForm } from './features/bikes/components/bike-form/bike-form';
 import { RentalList } from './features/rentals/pages/rental-list/rental-list';
 import { RentalDetails } from './features/rentals/components/rental-details/rental-details';
+import { RentalForm } from './features/rentals/components/rental-form/rental-form';
 
 export const routes: Routes = [
     //Bikes
@@ -32,6 +33,10 @@ export const routes: Routes = [
     {
         path: 'rentals',
         component: RentalList
+    },
+    {
+        path: 'rentals/new',
+        component: RentalForm
     },
     {
         path: 'rentals/:id',
