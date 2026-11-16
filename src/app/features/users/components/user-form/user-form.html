@@ -40,6 +40,7 @@
       </mat-form-field>
     }
 
+    @if (!id()) {
     <mat-form-field appearance="outline">
         <mat-label>Role</mat-label>
         <mat-select formControlName="role">
@@ -47,6 +48,7 @@
         <mat-option value="staff">Staff</mat-option>
         </mat-select>
     </mat-form-field>
+}
   
     @if (saveError(); as message) { <p role="alert">{{ message }}</p> }
     <button matButton="filled" type="submit" [disabled]="saving() || userForm.invalid">
