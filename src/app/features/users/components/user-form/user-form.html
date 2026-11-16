@@ -1,1 +1,56 @@
-<p>user-form works!</p>
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="user-form">
+    <h2>{{ id() ? (userRole() === 'staff' ? 'Edit Staff' : 'Edit Customer') : 'Create User' }}</h2>
+    <mat-form-field appearance="outline">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" />
+      @if (userForm.controls.name.hasError('required')) {
+        <mat-error>Name is required</mat-error>
+      } @else if (userForm.controls.name.hasError('blank')) {
+        <mat-error>Name cannot be blank</mat-error>
+      } @else if (userForm.controls.name.hasError('maxlength')) {
+        <mat-error>Maximum 30 characters</mat-error>
+      } @else if (userForm.controls.name.hasError('wrongValue')) {
+        <mat-error>Name cannot be test</mat-error>
+      }
+    </mat-form-field>
+  
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input matInput type="email" formControlName="email" />
+      @if (userForm.controls.email.hasError('required')) {
+        <mat-error>Email is required</mat-error>
+      } @else if (userForm.controls.email.hasError('email')) {
+        <mat-error>Invalid email</mat-error>
+      } @else if (userForm.controls.email.hasError('blank')) {
+        <mat-error>Email cannot be blank</mat-error>
+      }
+    </mat-form-field>
+  
+    @if (!id()) {
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" formControlName="password" />
+        @if (userForm.controls.password.hasError('required')) {
+          <mat-error>Password is required</mat-error>
+        } @else if (userForm.controls.password.hasError('minlength')) {
+          <mat-error>Minimum 6 characters</mat-error>
+        } @else if (userForm.controls.password.hasError('blank')) {
+          <mat-error>Password cannot be blank</mat-error>
+        }
+      </mat-form-field>
+    }
+
+    <mat-form-field appearance="outline">
+        <mat-label>Role</mat-label>
+        <mat-select formControlName="role">
+        <mat-option value="customer">Customer</mat-option>
+        <mat-option value="staff">Staff</mat-option>
+        </mat-select>
+    </mat-form-field>
+  
+    @if (saveError(); as message) { <p role="alert">{{ message }}</p> }
+    <button matButton="filled" type="submit" [disabled]="saving() || userForm.invalid">
+      {{ saving() ? 'Saving...' : 'Save User' }}
+    </button>
+    <a matButton routerLink="/users">Cancel</a>
+  </form>  

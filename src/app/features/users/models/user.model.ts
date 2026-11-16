@@ -9,6 +9,7 @@ export interface User {
     name: string;
     email: string;
     password: string;
+    role: 'customer' | 'staff';
   }
   
   export interface UpdateUserDto {
