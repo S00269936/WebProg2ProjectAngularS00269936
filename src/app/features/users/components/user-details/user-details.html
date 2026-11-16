@@ -1,1 +1,19 @@
-<p>user-details works!</p>
+@let s = state();
+@if (s.status === 'loading') {
+  <p>Loading user...</p>
+}
+@if (s.status === 'error') {
+  <p>Error loading user: {{ s.message }}</p>
+}
+@if (s.status === 'loaded') {
+  <h2>{{ s.data.name }}</h2>
+  <p>Email: {{ s.data.email }}</p>
+  <p>Role: {{ s.data.role }}</p>
+  <a matButton="filled" [routerLink]="['/users', s.data._id, 'edit']">Edit</a>
+  <button matButton="filled" (click)="deleteUser(s.data)" [disabled]="deleting()">
+    {{ deleting() ? 'Deleting...' : 'Delete' }}
+  </button>
+  @if (deleteError(); as message) {
+    <p role="alert">{{ message }}</p>
+  }
+}
