@@ -1,1 +1,7 @@
-<p>user-card works!</p>
+<div class="card">
+    <h3>{{ user().name }}</h3>
+    <p>Email: {{ user().email }}</p>
+    <p>Role: {{ user().role }}</p>
+    <a [routerLink]="['/users', user()._id]">View User</a>
+  </div>
+  

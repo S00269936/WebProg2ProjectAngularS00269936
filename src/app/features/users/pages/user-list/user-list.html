@@ -1,1 +1,15 @@
-<p>user-list works!</p>
+<h2>User List</h2>
+@let s = state();
+@if (s.status === 'loading') {
+  <p>Loading users...</p>
+} @else if (s.status === 'error') {
+  <p>{{ s.message }}</p>
+} @else if (s.data.length === 0) {
+  <p>No users available at the moment</p>
+} @else {
+  <div class="grid">
+    @for (user of s.data; track user._id) {
+      <app-user-card [user]="user"></app-user-card>
+    }
+  </div>
+}
