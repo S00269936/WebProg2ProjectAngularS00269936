@@ -1,4 +1,4 @@
-import { Component, input, inject, signal } from '@angular/core';
+import { Component, input, inject, signal, effect } from '@angular/core';
 import { Rental } from '../../models/rental.model';
 import { RentalService } from '../../services/rental.service';
 import { LoadState, withLoadState } from '../../../../shared/load-state';
@@ -6,6 +6,10 @@ import { toSignal, toObservable } from '@angular/core/rxjs-interop';
 import { switchMap } from 'rxjs';
 import { Router, RouterLink } from '@angular/router';
 import { MatAnchor } from '@angular/material/button';
+
+//displaying bike image with rental
+import { BikeService } from '../../../bikes/services/bike.service';
+import { Bike } from '../../../bikes/models/bike.model';
 
 @Component({
   selector: 'app-rental-details',
@@ -21,11 +25,14 @@ export class RentalDetails {
   private rentalService = inject(RentalService);
   readonly rental = signal<Rental | null>(null);
   readonly initial: LoadState<Rental> = {status: 'loading'};
+  private bikeService = inject(BikeService);
+  bike = signal<Bike | null>(null);
 
   state = toSignal(toObservable(this.id).pipe(switchMap((id) => withLoadState(this.rentalService.getRentalById(id))),
     ),
     { initialValue: this.initial },
   );
+  
 
   ngOnInit(): void {
     this.rentalService.getRentalById(this.id()).subscribe((rental) => {
@@ -44,6 +51,21 @@ export class RentalDetails {
         this.deleteError.set(err.message);
         this.deleting.set(false);
       },
+    });
+  }
+  loadBike(bikeId: string): void {
+    this.bikeService.getBikebyId(bikeId).subscribe({
+      next: (bike) => this.bike.set(bike),
+      error: (err) => console.error('Error loading bike:', err)
+    });
+  }
+  constructor() {
+    //this method waits for the state to load and then calls the above method by using the bike id
+    effect(() => {
+      const s = this.state();
+      if (s.status === 'loaded') {
+        this.loadBike(s.data.bike);
+      }
     });
   }
 }

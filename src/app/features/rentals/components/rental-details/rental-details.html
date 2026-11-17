@@ -15,7 +15,12 @@
   <p>Status: {{ s.data.status ? 'Active' : 'Inactive' }}</p>
   @if (s.data.customerNotes) {
     <p>Notes: {{ s.data.customerNotes }}</p>
+  }  
+  @if (bike()?.image) {
+    <img [src]="bike()!.image" [alt]="bike()!.bikeName" class="bike-image" />
+    <!-- only loads if bike image is present -->
   }
+
   <a matButton="filled" [routerLink]="['/rentals', s.data._id, 'edit']">Edit</a>
   <button matButton="outlined" (click)="deleteRental(s.data)" [disabled]="deleting()">Delete</button>
   @if (deleteError(); as message) {
