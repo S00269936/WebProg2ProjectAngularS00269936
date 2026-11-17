@@ -50,11 +50,32 @@
       <input matInput formControlName="description" placeholder="e.g. Can do sick tricks" />
       <mat-hint>Optional</mat-hint>
     </mat-form-field>
-    <!-- Action Buttons -->
+
+    <!-- Image field -->
+    <mat-form-field appearance="outline">
+      <mat-label>Image</mat-label>
+      <input matInput formControlName="image" placeholder="e.g. https://example.com/bike.jpg" />
+      <mat-hint>Optional</mat-hint>
+    </mat-form-field>
+
+    <!-- Colour -->
+    <mat-form-field appearance="outline">
+      <mat-label>Colour</mat-label>
+      <input matInput formControlName="colour" placeholder="e.g. Red" />
+      <mat-hint>Optional</mat-hint>
+    </mat-form-field>
+
+    <!-- Brand field -->
+    <mat-form-field appearance="outline">
+      <mat-label>Brand</mat-label>
+      <input matInput formControlName="brand" placeholder="e.g. Trek" />
+      <mat-hint>Optional</mat-hint>
+    </mat-form-field>
+  
+      <!-- Action Buttons -->
     @if (saveError(); as message) {
       <p role="alert">{{ message }}</p>
     }
-  
     <div class="button-group">
       <button matButton="filled" style="margin-right: 10px;" type="submit" [disabled]="saving() || bikeForm.invalid">
         {{ saving() ? 'Saving...' : 'Save bike' }}
@@ -62,4 +83,4 @@
       </button>
       <a matButton routerLink="/bikes">Cancel</a>
     </div>
-  </form>
+</form>

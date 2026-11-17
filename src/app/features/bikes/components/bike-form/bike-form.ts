@@ -33,13 +33,16 @@ bikeForm = this.formBuilder.nonNullable.group({
   type: ['', [Validators.required, Validators.maxLength(30), notBlank]],
   pricePerHour: [0, [Validators.min(1)]], 
   pricePerDay: [0, [Validators.min(1)]],
-  description: ['']
-  //will add more fields later
+  description: [''],
+  image: [''], //string for url
+  colour: [''], //colour validation?
+  brand: [''], //brand validation?
 });
 
 onSubmit(): void {
-  const { bikeName, type, pricePerHour, pricePerDay, description } = this.bikeForm.getRawValue();
-  const newBike: CreateBikeDto = { bikeName, type, pricePerHour, pricePerDay, description : description ?? undefined };
+  const { bikeName, type, pricePerHour, pricePerDay, description, image, colour, brand } = this.bikeForm.getRawValue();
+  const newBike: CreateBikeDto = { bikeName, type, pricePerHour, pricePerDay, description : description,
+    image: image, colour: colour, brand: brand ?? undefined };
   const id = this.id();
   const request = id ? this.bikeService.updateBike(id, newBike) : this.bikeService.addBike(newBike);
   this.saving.set(true);
@@ -62,7 +65,9 @@ ngOnInit(): void {
 
   this.bikeService.getBikebyId(id).subscribe({
     next: (bike) =>
-      this.bikeForm.patchValue({ bikeName: bike.bikeName, type: bike.type, pricePerHour: bike.pricePerHour ?? 0, pricePerDay: bike.pricePerDay ?? 0, description: bike.description ?? '' }),
+      this.bikeForm.patchValue({ bikeName: bike.bikeName, type: bike.type, pricePerHour: bike.pricePerHour ?? 0,
+         pricePerDay: bike.pricePerDay ?? 0, description: bike.description ?? '',
+         image: bike.image ?? '', colour: bike.colour ?? '', brand: bike.brand ?? '' }),
     error: (err: Error) => this.saveError.set(err.message),
   });
 }
