@@ -1,14 +1,6 @@
 To Do:
-3. Improve CSS, improve all buttons and links. After 5,6 and 7.
-4. Ensure mobile view works. After 3.
-
-6. Add extra input options for bike and maybe rental.
-7. If possible, get images working.
-
-bike model to add:
-available - boolean
-image - url as string or bitmap?
-colour - meh, string
-brand - string
-
-8. Validation on form fields? What can be accepeted e.g colours
+ Improve CSS, improve all buttons and links.
+ Ensure mobile view works.
+ Validation on form fields? What can be accepeted e.g colours
+Add cards for all features, bikes / users / rentals
+Showcase bike images on rentals, maybe total price can calculated from length of time rented
