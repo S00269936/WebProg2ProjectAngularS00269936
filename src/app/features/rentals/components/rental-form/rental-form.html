@@ -1,28 +1,16 @@
 <form [formGroup]="rentalForm" (ngSubmit)="onSubmit()" class="rental-form">
-    <h2>Rental Details Form</h2>
+  <h2>{{ id() ? 'Edit Rental' : 'Create Rental' }}</h2>
   
-    <!-- Bike ID Field -->
-     <h3>Maybe change how this works, load data from mongo<br>
-    Also add css for form, looks ugly</h3>
+    <!-- Bike Fields -->    
     <mat-form-field appearance="outline">
-      <mat-label>Bike ID</mat-label>
-      <input matInput formControlName="bike" placeholder="Enter Bike ID" />
+      <mat-label>Select Bike</mat-label>
+      <mat-select formControlName="bike" (selectionChange)="onBikeChange($event.value)">
+        @for (bike of bikes(); track bike._id) {
+          <mat-option [value]="bike._id">{{ bike.bikeName }}</mat-option>
+        }
+      </mat-select>
       @if (rentalForm.controls.bike.hasError('required')) {
-        <mat-error>Bike ID is required</mat-error>
-      }
-    </mat-form-field>
-  
-    <!-- Bike Name Field -->
-    <mat-form-field appearance="outline">
-      <mat-label>Bike Name</mat-label>
-      <input matInput formControlName="bikeName" placeholder="e.g. Trek Marlin 7" />
-      @if (rentalForm.controls.bikeName.hasError('blank')) {
-        <mat-error>Bike Name cannot be only spaces</mat-error>
-      } @else if (rentalForm.controls.bikeName.hasError('required')) {
-        <mat-error>Bike Name is required</mat-error>
-      }
-      @if (rentalForm.controls.bikeName.hasError('wrongValue')) {
-        <mat-error>Bike Name cannot be test</mat-error>
+        <mat-error>Please select a bike</mat-error>
       }
     </mat-form-field>
   
@@ -95,9 +83,8 @@
     }
   
     <div class="button-group">
-      <button matButton="filled" style="margin-right: 10px;" type="submit"
-        [disabled]="saving() || rentalForm.invalid">
-        {{ saving() ? 'Saving...' : 'Save Rental' }}
+      <button matButton="filled" type="submit" [disabled]="saving() || rentalForm.invalid">
+        {{ saving() ? 'Saving...' : (id() ? 'Update Rental' : 'Create Rental') }}
         @if (saving()) {
           <mat-progress-bar mode="buffer" />
         }

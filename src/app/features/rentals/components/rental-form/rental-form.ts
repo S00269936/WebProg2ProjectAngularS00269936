@@ -13,9 +13,14 @@ import { notBlank } from '../../../../shared/validators/not-blank.validators';
 import { wrongValue } from '../../../../shared/validators/wrong-value.validators';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 
+//Loading BikeID's for adding rentals
+import { BikeService } from '../../../bikes/services/bike.service';
+import { Bike } from '../../../bikes/models/bike.model';
+import { MatSelectModule } from '@angular/material/select';
+
 @Component({
   selector: 'app-rental-form',
-  imports: [RouterLink, MatCheckboxModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatCardModule, MatProgressBarModule],
+  imports: [RouterLink, MatSelectModule, MatCheckboxModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatCardModule, MatProgressBarModule],
   templateUrl: './rental-form.html',
   styleUrl: './rental-form.scss',
 })
@@ -27,6 +32,9 @@ export class RentalForm implements OnInit {
   private snackBar = inject(MatSnackBar);
   saving = signal(false);
   saveError = signal<string | null>(null);
+  //for bike ids
+  private bikeService = inject(BikeService);
+  bikes = signal<Bike[]>([]);
 
   
 rentalForm = this.formBuilder.nonNullable.group({
@@ -61,6 +69,10 @@ onSubmit(): void {
     });
 }
 ngOnInit(): void {
+  this.bikeService.getBikes().subscribe({
+    next: (bikes) => this.bikes.set(bikes),
+    error: (err: Error) => this.saveError.set(err.message)
+  }); //get all bikes for id dropdown
   const id = this.id();
   if (!id) return;
   this.rentalService.getRentalById(id).subscribe({
@@ -71,4 +83,15 @@ ngOnInit(): void {
     }
   });
 }
+
+onBikeChange(id: string): void {
+  const bike = this.bikes().find(b => b._id === id);
+
+  if (bike) {
+    this.rentalForm.patchValue({
+      bike: bike._id,
+      bikeName: bike.bikeName
+    });
+  }
+} //loads bike name to the dropdown when the bike id is selected
 }
