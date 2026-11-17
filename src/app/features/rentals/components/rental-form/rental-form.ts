@@ -92,6 +92,20 @@ onBikeChange(id: string): void {
       bike: bike._id,
       bikeName: bike.bikeName
     });
+    this.calculateTotalPrice();
   }
 } //loads bike name to the dropdown when the bike id is selected
+
+calculateTotalPrice(): void {
+  const { bike, startDate, endDate } = this.rentalForm.getRawValue();
+  const selectedBike = this.bikes().find(b => b._id === bike);
+  if (!selectedBike || !startDate || !endDate) return;
+  const start = new Date(startDate);
+  const end = new Date(endDate);
+  const days = Math.ceil(
+    (end.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)
+  );
+  const total = Math.max(1, days) * (selectedBike.pricePerDay ?? 0);
+  this.rentalForm.patchValue({ totalPrice: total });
+}
 }

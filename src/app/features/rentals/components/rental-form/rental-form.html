@@ -41,32 +41,26 @@
     <!-- Start Date Field -->
     <mat-form-field appearance="outline">
       <mat-label>Start Date</mat-label>
-      <input matInput type="date" formControlName="startDate" />
-      @if (rentalForm.controls.startDate.hasError('required')) {
-        <mat-error>Start Date is required</mat-error>
-      }
+      <input matInput type="date" formControlName="startDate"
+      (change)="calculateTotalPrice()"/>
     </mat-form-field>
   
     <!-- End Date Field -->
     <mat-form-field appearance="outline">
       <mat-label>End Date</mat-label>
-      <input matInput type="date" formControlName="endDate" />
-      @if (rentalForm.controls.endDate.hasError('required')) {
-        <mat-error>End Date is required</mat-error>
-      }
+      <input matInput type="date" formControlName="endDate"
+      (change)="calculateTotalPrice()"/>
     </mat-form-field>
   
     <!-- Total Price Field -->
     <mat-form-field appearance="outline">
-      <mat-label>Total Price</mat-label>
-      <input matInput type="number" formControlName="totalPrice" placeholder="e.g. 40" />
-      @if (rentalForm.controls.totalPrice.hasError('required')) {
-        <mat-error>Total Price is required</mat-error>
-      } @else if (rentalForm.controls.totalPrice.hasError('min')) {
-        <mat-error>Total Price must be at least €1</mat-error>
-      }
+      <mat-label>Total Price (€)</mat-label>
+      <input matInput type="number" formControlName="totalPrice" [readonly]="!id()" />
+      @if (!id()) {<mat-hint>Automatically calculated from the bike and rental dates</mat-hint>} 
+      @else {<mat-hint>You can manually adjust the total price</mat-hint>}
+      <!-- hint depends whether user is creating or editing rental -->
     </mat-form-field>
-  
+
     <!-- Status Field -->
     <mat-checkbox formControlName="status">Active Rental</mat-checkbox>
   
