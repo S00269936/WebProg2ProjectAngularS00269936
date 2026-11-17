@@ -1,4 +1,8 @@
 <h2>User List</h2>
+<div class="buttons">
+  <a matbutton matButton="filled" routerLink="/users/new">Add New User</a>
+  <a matbutton matButton="filled" routerLink="/">Go Home</a>
+</div>
 @let s = state();
 @if (s.status === 'loading') {
   <p>Loading users...</p>
@@ -13,6 +17,3 @@
     }
   </div>
 }
-<a style="margin-top: 5px;" matbutton matButton="filled" routerLink="/users/new">Add New User</a>
-<br>
-<a style="margin-top: 5px;" matbutton matButton="filled" routerLink="/">Go Home</a>

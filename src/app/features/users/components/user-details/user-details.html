@@ -2,13 +2,15 @@
 @if (s.status === 'loading') {
   <p>Loading user...</p>
 }
-@if (s.status === 'error') {
+@else if (s.status === 'error') {
   <p>Error loading user: {{ s.message }}</p>
 }
 @if (s.status === 'loaded') {
+  <div class="details">
   <h2>{{ s.data.name }}</h2>
   <p>Email: {{ s.data.email }}</p>
   <p>Role: {{ s.data.role }}</p>
+  <div class="buttons">
   <a matButton="filled" [routerLink]="['/users', s.data._id, 'edit']">Edit</a>
   <button matButton="outlined" (click)="deleteUser(s.data)" [disabled]="deleting()">
     {{ deleting() ? 'Deleting...' : 'Delete' }}
@@ -17,4 +19,6 @@
     <p role="alert">{{ message }}</p>
   }
   <button matButton="filled" routerLink="/users">Back to User List</button>
+  </div>
+  </div>
 }

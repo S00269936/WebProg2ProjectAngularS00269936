@@ -51,8 +51,10 @@
 }
   
     @if (saveError(); as message) { <p role="alert">{{ message }}</p> }
+    <div class="button-group">
     <button matButton="filled" type="submit" [disabled]="saving() || userForm.invalid">
       {{ saving() ? 'Saving...' : 'Save User' }}
     </button>
     <a matButton routerLink="/users">Cancel</a>
+    </div>
   </form>  
