@@ -11,6 +11,7 @@ import { MatProgressBar, MatProgressBarModule } from '@angular/material/progress
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { notBlank } from '../../../../shared/validators/not-blank.validators';
 import { wrongValue } from '../../../../shared/validators/wrong-value.validators';
+import { imageUrlValidator } from '../../../../shared/validators/image-valid.validator';
 
 @Component({
   selector: 'app-bike-form',
@@ -34,7 +35,7 @@ bikeForm = this.formBuilder.nonNullable.group({
   pricePerHour: [0, [Validators.min(1)]], 
   pricePerDay: [0, [Validators.min(1)]],
   description: [''],
-  image: [''], //string for url
+  image: ['', [imageUrlValidator]], //string for url
   colour: [''], //colour validation?
   brand: [''], //brand validation?
 });

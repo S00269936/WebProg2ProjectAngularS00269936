@@ -56,6 +56,9 @@
       <mat-label>Image</mat-label>
       <input matInput formControlName="image" placeholder="e.g. https://example.com/bike.jpg" />
       <mat-hint>Optional</mat-hint>
+      @if (bikeForm.controls.image.hasError('invalidImageUrl')) {
+        <mat-error>Image must be a valid URL</mat-error>
+      }
     </mat-form-field>
 
     <!-- Colour -->
