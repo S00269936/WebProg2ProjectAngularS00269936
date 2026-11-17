@@ -1,11 +1,11 @@
 <h2>Rental Details</h2>
-<p>Rental Id is {{id()}}</p>
 @let s = state();
 @if (s.status === 'loading') {
   <p>Loading rental details...</p>
 } @else if (s.status === 'error') {
   <p>{{ s.message }}</p>
 } @else {
+  <div class="details">
   <h2>{{ s.data.bikeName }}</h2>
   <p>Customer: {{ s.data.customerName }}</p>
   <p>Contact Phone: {{ s.data.contactPhone }}</p>
@@ -20,11 +20,13 @@
     <img [src]="bike()!.image" [alt]="bike()!.bikeName" class="bike-image" />
     <!-- only loads if bike image is present -->
   }
-
+  <div class="buttons">
   <a matButton="filled" [routerLink]="['/rentals', s.data._id, 'edit']">Edit</a>
   <button matButton="outlined" (click)="deleteRental(s.data)" [disabled]="deleting()">Delete</button>
   @if (deleteError(); as message) {
     <p class="error">{{ message }}</p>
   }
   <button matButton="filled" routerLink="/rentals">Back to Rental List</button>
+  </div>
+  </div>
 }
