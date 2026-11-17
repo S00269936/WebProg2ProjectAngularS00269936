@@ -6,6 +6,7 @@ import { toSignal, toObservable } from '@angular/core/rxjs-interop';
 import { switchMap } from 'rxjs';
 import { Router, RouterLink } from '@angular/router';
 import { MatAnchor } from '@angular/material/button';
+import { DatePipe } from '@angular/common';
 
 //displaying bike image with rental
 import { BikeService } from '../../../bikes/services/bike.service';
@@ -13,7 +14,7 @@ import { Bike } from '../../../bikes/models/bike.model';
 
 @Component({
   selector: 'app-rental-details',
-  imports: [RouterLink, MatAnchor],
+  imports: [RouterLink, MatAnchor, DatePipe],
   templateUrl: './rental-details.html',
   styleUrl: './rental-details.scss',
 })

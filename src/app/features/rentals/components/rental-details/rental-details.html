@@ -9,8 +9,8 @@
   <h2>{{ s.data.bikeName }}</h2>
   <p>Customer: {{ s.data.customerName }}</p>
   <p>Contact Phone: {{ s.data.contactPhone }}</p>
-  <p>Start Date: {{ s.data.startDate }}</p>
-  <p>End Date: {{ s.data.endDate }}</p>
+  <p>Start Date: {{ s.data.startDate | date:'dd/MM/yyyy' }}</p>
+  <p>End Date: {{ s.data.endDate | date:'dd/MM/yyyy' }}</p>
   <p>Total Price: €{{ s.data.totalPrice }}</p>
   <p>Status: {{ s.data.status ? 'Active' : 'Inactive' }}</p>
   @if (s.data.customerNotes) {
