@@ -5,5 +5,5 @@
     <p>End Date: {{ rental().endDate }}</p>
     <p>Total Price: €{{ rental().totalPrice }}</p>
     <p>Status: {{ rental().status ? 'Rented' : 'Not Rented' }}</p>
-    <a [routerLink]="['/rentals', rental()._id]">View Rental</a>
+    <a matbutton matButton="filled" [routerLink]="['/rentals', rental()._id]">View Rental</a>
 </div>

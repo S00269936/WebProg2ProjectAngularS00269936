@@ -4,10 +4,11 @@ import { RouterLink } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { withLoadState } from '../../../../shared/load-state.js'
 import { RentalCard } from '../../components/rental-card/rental-card';
+import { MatAnchor } from '@angular/material/button';
 
 @Component({
   selector: 'app-rental-list',
-  imports: [RouterLink, RentalCard],
+  imports: [RouterLink, RentalCard, MatAnchor],
   templateUrl: './rental-list.html',
   styleUrl: './rental-list.scss',
 })

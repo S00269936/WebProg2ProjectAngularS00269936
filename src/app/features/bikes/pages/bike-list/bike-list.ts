@@ -4,11 +4,12 @@ import { BikeCard } from '../../components/bike-card/bike-card';
 import { RouterLink } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { withLoadState } from '../../../../shared/load-state.js'
+import { MatAnchor } from '@angular/material/button';
 
 
 @Component({
   selector: 'app-bike-list',
-  imports: [ BikeCard, RouterLink],
+  imports: [BikeCard, RouterLink, MatAnchor],
   templateUrl: './bike-list.html',
   styleUrl: './bike-list.scss',
 })
