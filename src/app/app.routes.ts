@@ -8,13 +8,13 @@ import { RentalForm } from './features/rentals/components/rental-form/rental-for
 import { UserList } from './features/users/pages/user-list/user-list';
 import { UserForm } from './features/users/components/user-form/user-form';
 import { UserDetails } from './features/users/components/user-details/user-details';
+import { Home } from './features/home/pages/home/home';
 
 export const routes: Routes = [
     //Bikes
     {
         path: '',
-        redirectTo: 'bikes',
-        pathMatch: 'full'
+        component: Home
     },
     {
         path: 'bikes',
