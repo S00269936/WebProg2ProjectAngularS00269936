@@ -10,10 +10,11 @@
   <p>Email: {{ s.data.email }}</p>
   <p>Role: {{ s.data.role }}</p>
   <a matButton="filled" [routerLink]="['/users', s.data._id, 'edit']">Edit</a>
-  <button matButton="filled" (click)="deleteUser(s.data)" [disabled]="deleting()">
+  <button matButton="outlined" (click)="deleteUser(s.data)" [disabled]="deleting()">
     {{ deleting() ? 'Deleting...' : 'Delete' }}
   </button>
   @if (deleteError(); as message) {
     <p role="alert">{{ message }}</p>
   }
+  <button matButton="filled" routerLink="/users">Back to User List</button>
 }
