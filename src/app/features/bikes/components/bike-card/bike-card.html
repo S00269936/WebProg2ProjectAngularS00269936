@@ -1,5 +1,6 @@
 <div class="card">
     <h3>{{ bike().bikeName }} {{ bike().type }}</h3>
     @if(bike().pricePerHour){ <p>Price per hour: €{{ bike().pricePerHour }}</p>}
+    @if (bike().pricePerDay) {<p>Price per day: €{{ bike().pricePerDay }}</p>}
     <a matbutton matButton="filled" [routerLink]="['/bikes', bike()._id]">View Bike</a>
 </div>

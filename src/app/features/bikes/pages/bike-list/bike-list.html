@@ -1,4 +1,8 @@
 <h2>Bike List</h2>
+<div class="buttons">
+<a matbutton matButton="filled" routerLink="/bikes/new">Add New Bike</a>
+<a matbutton matButton="filled" routerLink="/">Go Home</a>
+</div>
 @let s = state();
 <!-- s is signal -->
 @if (s.status === 'loading') {
@@ -14,7 +18,3 @@
     }
   </div>
 }
-
-<a style="margin-top: 5px;" matbutton matButton="filled" routerLink="/bikes/new">Add New Bike</a>
-<br>
-<a style="margin-top: 5px;" matbutton matButton="filled" routerLink="/">Go Home</a>

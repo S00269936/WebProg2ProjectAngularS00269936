@@ -1,12 +1,35 @@
 .bike-form {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    max-width: 32rem;
-    margin: 1rem auto;
-  }
-  
-  mat-form-field {
-    width: 100%;
-  }
-  
+  max-width: 650px;
+  margin: 25px auto;
+  padding: 25px;
+  background-color: white;
+  border: 1px solid #ccc;
+}
+
+h2 {
+  text-align: center;
+  color: #245b88;
+  margin-bottom: 25px;
+}
+
+mat-form-field {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+button, a {
+  border-radius: 0;
+}
+
+p[role="alert"] {
+  color: red;
+  text-align: center;
+}
