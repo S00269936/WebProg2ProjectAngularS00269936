@@ -7,8 +7,10 @@ export interface Bike {
   available?: boolean;
   description?: string;
   image?: string;
-  colour?: string;
-  brand?: string;
+  colour?: 'red' | 'blue' | 'green' | 'yellow' | 'orange' | 'black' | 'white' |
+   'grey' | 'silver' | 'purple' | 'pink' | 'brown' | 'gold';
+   brand?: 'Trek' | 'Giant' | 'Specialized' | 'Cannondale' | 'Scott' | 'Cube' | 
+   'Merida' | 'Bianchi' | 'Canyon' | 'Orbea' | 'Santa Cruz' | 'Raleigh' | 'Brompton' | 'GT' | 'Norco';
 }
 export interface CreateBikeDto {
   bikeName: string;

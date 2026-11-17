@@ -12,10 +12,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { notBlank } from '../../../../shared/validators/not-blank.validators';
 import { wrongValue } from '../../../../shared/validators/wrong-value.validators';
 import { imageUrlValidator } from '../../../../shared/validators/image-valid.validator';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-bike-form',
-  imports: [ReactiveFormsModule, RouterLink, MatButtonModule, MatFormFieldModule, MatInputModule, MatCardModule, MatProgressBar, MatProgressBarModule],
+  imports: [ReactiveFormsModule, RouterLink, MatButtonModule, MatFormFieldModule,
+     MatInputModule, MatCardModule, MatProgressBar, MatProgressBarModule, MatSelectModule],
   templateUrl: './bike-form.html',
   styleUrl: './bike-form.scss',
 })
@@ -36,8 +38,8 @@ bikeForm = this.formBuilder.nonNullable.group({
   pricePerDay: [0, [Validators.min(1)]],
   description: [''],
   image: ['', [imageUrlValidator]], //string for url
-  colour: [''], //colour validation?
-  brand: [''], //brand validation?
+  colour: [''],
+  brand: [''],
 });
 
 onSubmit(): void {
@@ -72,4 +74,15 @@ ngOnInit(): void {
     error: (err: Error) => this.saveError.set(err.message),
   });
 }
+colours = [
+  'red', 'blue', 'green', 'yellow', 'orange',
+  'black', 'white', 'grey', 'silver', 'purple',
+  'pink', 'brown', 'gold'];
+
+brands = [
+  'Trek', 'Giant', 'Specialized', 'Cannondale',
+  'Scott', 'Cube', 'Merida', 'Bianchi',
+  'Canyon', 'Orbea', 'Santa Cruz', 'Raleigh',
+  'Brompton', 'GT', 'Norco'];
+  //arrays of option for dropdown boxes
 }

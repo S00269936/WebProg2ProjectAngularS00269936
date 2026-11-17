@@ -64,15 +64,23 @@
     <!-- Colour -->
     <mat-form-field appearance="outline">
       <mat-label>Colour</mat-label>
-      <input matInput formControlName="colour" placeholder="e.g. Red" />
-      <mat-hint>Optional</mat-hint>
+      <mat-select formControlName="colour">
+        <mat-option value="">None</mat-option>
+        @for (colour of colours; track colour) {
+          <mat-option [value]="colour">{{ colour }}</mat-option>
+        }
+      </mat-select>
     </mat-form-field>
 
     <!-- Brand field -->
     <mat-form-field appearance="outline">
       <mat-label>Brand</mat-label>
-      <input matInput formControlName="brand" placeholder="e.g. Trek" />
-      <mat-hint>Optional</mat-hint>
+      <mat-select formControlName="brand">
+        <mat-option value="">None</mat-option>
+        @for (brand of brands; track brand) {
+          <mat-option [value]="brand">{{ brand }}</mat-option>
+        }
+      </mat-select>
     </mat-form-field>
   
       <!-- Action Buttons -->
