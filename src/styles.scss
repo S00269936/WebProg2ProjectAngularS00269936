@@ -18,22 +18,38 @@ html {
     )
   );
 }
+$primary: #245b88;
+$background: #f2f2f2;
+$text: #222;
+$border: #ccc;
 
 body {
-  // Default the application to a light color theme. This can be changed to
-  // `dark` to enable the dark color theme, or to `light dark` to defer to the
-  // user's system settings.
+  background: $background;
+  color: $text;
+  font-family: Arial, sans-serif;
   color-scheme: light;
-
-  // Set a default background, font and text colors for the application using
-  // Angular Material's system-level CSS variables. Learn more about these
-  // variables at https://material.angular.dev/guide/system-variables
-  background-color: var(--mat-sys-surface);
-  color: var(--mat-sys-on-surface);
-  font: var(--mat-sys-body-medium);
-
-  // Reset the user agent margin.
   margin: 0;
-  height: 100%;
+  min-height: 100%;
 }
+
+button {
+  background: $primary;
+  color: white;
+  border: 1px solid $primary;
+  padding: 8px 15px;
+  border-radius: 0;
+  cursor: pointer;
+}
+button:hover {
+  background: #194363;
+}
+// Angular Material buttons
+.mat-mdc-button,
+.mat-mdc-raised-button,
+.mat-mdc-unelevated-button,
+.mat-mdc-outlined-button {
+  background-color: #245b88 !important;
+  color: white !important;
+  border-radius: 0 !important;
+} //gpt generated css for mat buttons
 /* You can add global styles to this file, and also import other style files */
